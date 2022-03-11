@@ -1,0 +1,18 @@
+Button {
+  -fx-background-color: #ced4da;
+  -fx-background-radius: 8, 7, 6;
+  -fx-text-fill: black;
+  -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.6), 5, 0, 0, 1);
+}
+
+.list-cell:empty {
+  visibility: hidden;
+}
+
+.list-view .list-cell:even {
+  -fx-background-color: #ced4da;
+}
+
+.list-view .list-cell:odd {
+  -fx-background-color: #adb5bd;
+}

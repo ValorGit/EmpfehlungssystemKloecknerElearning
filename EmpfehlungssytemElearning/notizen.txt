@@ -1,0 +1,40 @@
+match (p:Position {name:"Werkstudent IT"})-[r1:ERFORDERT_SKILL]->(s:Skill)<-[r2:FOERDERT]-(k:Kurs) ( ignoreMe in CASE WHEN exists ((p)-[:LOVES]-(p2)) THEN [] ELSE [1] END | merge (p)-[:LOVES {weight: 0}]->(p2))
+
+
+match (p:Position {name:"Werkstudent IT"})-[r1:ERFORDERT_SKILL]->(s:Skill)<-[r2:FOERDERT]-(k:Kurs) 
+
+Erstellen von Gewichtung
+Schritt1:
+match (p:Position {name: "Werkstudent IT"}) match (k:Kurs) match (s:Skill) match (ut:Subthema)  match (p)-[r1:ERFORDERT_THEMA]->(ut)<-[:HAT_THEMA]-(k) merge (k)-[:RELEVANT_FUER {gewichtung: r1.gewichtung}]->(p)
+
+(Bei Berechnung vor Schritt 2 alte Relationen löschen)
+Schritt2
+match (l:Lerner {name: "Alexander Dünne"})-[:LERNT_SKILL]->(s:Skill) with l, collect(id(s)) as lSkills match (k:Kurs )-[:FOERDERT]->(s:Skill)<-[:LERNT_SKILL]-(l) with l, lSkills, k match (k)-[:FOERDERT]->(s2:Skill) with l, lSkills,k, toFLoat(size(apoc.coll.intersection(lSkills, collect(id(s2))))) / toFloat(size(apoc.coll.union(lSkills, collect(id(s2))))) as sim merge (k)-[e:EMPFEHLE]->(l) set e.empfehlwert = sim 
+
+Schritt3
+match (l:Lerner{name: "Alexander Dünne"})-[pr:HAT_POSITION]->(p:Position) match (k2:Kurs)-[relevanz:RELEVANT_FUER]->(p) merge (k2)-[e:EMPFEHLE]->(l) On Create set e.empfehlwert = relevanz.gewichtung On Match set e.empfehlwert = e.empfehlwert + relevanz.gewichtung return l,k2
+
+Berechnung:
+Vorwertung von Kategorien und Skills nach Relevanz: 
+niedrig = 1
+mittel = 3
+hoch = 5
+Berechnung der Gesamtrelevanz nach arithmethischer Mittelwert:
+xa = 1
+n
+n∑
+i=1
+xi = (x1 + x2 + · · · + xn) / n
+
+Lerner kann entscheiden, ob ein Skill höher priorisiert wird.
+
+
+match (p:Position {name: "Werkstudent IT"})-[:ERFORDERT_SKILL]->(s:Skill) with p, collect(id(s)) as pSkills match (k:Kurs)-[:FOERDERT]->(s2:Skill) with p, pSkills, k, collect(id(s2)) AS kSkills return p.name AS Position, k.name AS Kurs, gds.alpha.similarity.jaccard(pSkills, kSkills) AS similarity
+
+Berechnen von jaccard-Ähnlichkeit
+match (p:Position {name: "Werkstudent IT"})-[:ERFORDERT_SKILL]->(s:Skill) with p, collect(id(s)) as pSkills match (k:Kurs )-[:FOERDERT]->(s2:Skill) with p, pSkills, k, toFLoat(size(apoc.coll.intersection(pSkills, collect(id(s2))))) / toFloat(size(apoc.coll.union(pSkills, collect(id(s2))))) as sim  return p, k, sim
+
+Noch zu optimieren aber funktional
+match (l:Lerner {name: "Alexander Dünne"})-[:LERNT_SKILL]->(s:Skill) with l, collect(id(s)) as lSkills match (k:Kurs )-[:FOERDERT]->(s:Skill)<-[:LERNT_SKILL]-(l) with l, lSkills, k match (k)-[:FOERDERT]->(s2:Skill) with l, lSkills,k, toFLoat(size(apoc.coll.intersection(lSkills, collect(id(s2))))) / toFloat(size(apoc.coll.union(lSkills, collect(id(s2))))) as sim  return l, k, sim
+
+

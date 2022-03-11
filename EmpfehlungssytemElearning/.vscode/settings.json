@@ -1,0 +1,17 @@
+{
+  "java.project.sourcePaths": ["src"],
+  "java.project.outputPath": "bin",
+  "java.project.referencedLibraries": [
+    "lib/**/*.jar",
+    "d:\\Studium\\Bachelorarbeit\\neo4j-java-driver-4.1.0.jar",
+    "d:\\Studium\\Bachelorarbeit\\reactive-streams-1.0.3.jar",
+    "d:\\Studium\\javafx-sdk-17.0.2\\lib\\javafx.base.jar",
+    "d:\\Studium\\javafx-sdk-17.0.2\\lib\\javafx.controls.jar",
+    "d:\\Studium\\javafx-sdk-17.0.2\\lib\\javafx.fxml.jar",
+    "d:\\Studium\\javafx-sdk-17.0.2\\lib\\javafx.graphics.jar",
+    "d:\\Studium\\javafx-sdk-17.0.2\\lib\\javafx.media.jar",
+    "d:\\Studium\\javafx-sdk-17.0.2\\lib\\javafx.swing.jar",
+    "d:\\Studium\\javafx-sdk-17.0.2\\lib\\javafx.web.jar",
+    "d:\\Studium\\javafx-sdk-17.0.2\\lib\\javafx-swt.jar"
+  ]
+}

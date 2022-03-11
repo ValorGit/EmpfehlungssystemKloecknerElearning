@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="472.0" prefWidth="773.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="empfehlungssystem.KursUebersichtController">
+   <children>
+      <VBox prefHeight="471.0" prefWidth="769.0" style="-fx-background-color: white;">
+         <children>
+            <Pane prefHeight="43.0" prefWidth="871.0" style="-fx-background-color: #6C757D;">
+               <children>
+                  <HBox prefHeight="42.0" prefWidth="773.0" style="-fx-background-color: #6C757D;">
+                     <children>
+                        <Label fx:id="kurstitel" prefHeight="42.0" prefWidth="799.0" text="Kurstitel" textFill="WHITE">
+                           <HBox.margin>
+                              <Insets left="20.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font name="System Bold" size="17.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+               </children>
+            </Pane>
+            <HBox alignment="CENTER_LEFT" prefHeight="334.0" prefWidth="698.0">
+               <children>
+                  <ImageView fx:id="kursbild" fitHeight="233.0" fitWidth="228.0" pickOnBounds="true" preserveRatio="true">
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <Label fx:id="kursbeschreibung" prefHeight="240.0" prefWidth="484.0" text="Label" textAlignment="JUSTIFY" wrapText="true">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="15.0" right="15.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_RIGHT" prefHeight="72.0" prefWidth="698.0">
+               <children>
+                  <Label fx:id="kursAnfordernLabel" alignment="CENTER" prefHeight="17.0" prefWidth="612.0" textFill="#eb1010">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="kursButton" mnemonicParsing="false" onAction="#kursButtonPressed" prefHeight="35.0" prefWidth="113.0" stylesheets="@../buttoncss.css" text="Kurs starten">
+                     <HBox.margin>
+                        <Insets right="50.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
